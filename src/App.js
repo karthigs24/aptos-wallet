@@ -34,16 +34,16 @@ function App() {
 
   const transfer = async () => {
     const transaction = {
-      arguments: [address, '717'],
+      arguments: [address, '1000'],
       function: '0x1::coin::transfer',
       type: 'entry_function_payload',
-      type_arguments: ['0x1::aptos_coin::TestCoin'],
+      type_arguments: ['0x1::aptos_coin::AptosCoin'],
     };
     try {
       const pendingTransaction = await(window).aptos.signAndSubmitTransaction(transaction);
       console.log("pendingTransaction", pendingTransaction);
       // In most cases a dApp will want to wait for the transaction, in these cases you can use the typescript sdk
-      const client = new AptosClient('https://testnet.aptoslabs.com');
+      const client = new AptosClient('https://fullnode.devnet.aptoslabs.com');
       client.waitForTransaction(pendingTransaction.hash);
     } catch (error) {
       // see "Errors"
